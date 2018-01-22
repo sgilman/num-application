@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  </head>
+  <body>
+  
+  <svg width=600 height=300>
+  <g id="my-axis"></g>
+</svg>
+     <script src="https://d3plus.org/js/d3.js"></script>
+
+      <script src="js/d3plus.v2.js"></script>
+	  <script>
+		var data = [
+		 {
+		   "id": "US",
+		   "x": 2009,
+		   "y": 14
+		 },
+		 {
+		   "id": "US",
+		   "x": 2010,
+		   "y": 9
+		 },
+		 {
+		   "id": "US",
+		   "x": 2011,
+		   "y": 17
+		 },
+		 {
+		   "id": "US",
+		   "x": 2012,
+		   "y": 16
+		 },
+		 {
+		   "id": "US",
+		   "x": 2013,
+		   "y": 22
+		 },
+		 {
+		   "id": "US",
+		   "x": 2014,
+		   "y": 14
+		 },
+		 {
+		   "id": "US",
+		   "x": 2015,
+		   "y": 22
+		 },
+		 {
+		   "id": "US",
+		   "x": 2016,
+		   "y": 23
+		 },
+		 {
+		   "id": "US",
+		   "x": 2017,
+		   "y": 28
+		 },
+/**
+		 {
+		   "id": "World",
+		   "x": 2009,
+		   "y": 207
+		 },
+		 {
+		   "id": "World",
+		   "x": 2010,
+		   "y": 223
+		 },
+		 {
+		   "id": "World",
+		   "x": 2011,
+		   "y": 251
+		 },
+		 {
+		   "id": "World",
+		   "x": 2012,
+		   "y": 292
+		 },
+		 {
+		   "id": "World",
+		   "x": 2013,
+		   "y": 246
+		 },
+		 {
+		   "id": "World",
+		   "x": 2014,
+		   "y": 278
+		 },
+		 {
+		   "id": "World",
+		   "x": 2015,
+		   "y": 245
+		 }
+**/
+		];
+		
+		var bottom = new d3plus.AxisBottom()
+		  .select("#my-axis")
+		  .domain([0, 10])
+		  .width(600)
+		  .height(300)
+		  .render();
+		
+		new d3plus.LinePlot()
+			.select("#my-axis")
+			.data(data)
+			.groupBy("id")
+			.tooltip(false)
+			.yDomain([0])
+			.shapeConfig(
+				{Line :
+					{stroke: "#FF9C24"}
+				})
+			.render();
+		d3.select('.d3plus-line-shape').on('click', function() {console.log('hi');});
+	</script>
+</body>
+</html>

@@ -1,0 +1,467 @@
+var googleTrendsData = [
+ {
+   "name": "St. Helena",
+   "val": 100,
+   "id": ""
+ },
+ {
+   "name": "India",
+   "val": 47,
+   "id": "asind"
+ },
+ {
+   "name": "Macau",
+   "val": 42,
+   "id": "asmac"
+ },
+ {
+   "name": "Mauritius",
+   "val": 39,
+   "id": "afmus"
+ },
+ {
+   "name": "United Arab Emirates",
+   "val": 36,
+   "id": "asare"
+ },
+ {
+   "name": "Malta",
+   "val": 35,
+   "id": "eumlt"
+ },
+ {
+   "name": "Mongolia",
+   "val": 34,
+   "id": "asmng"
+ },
+ {
+   "name": "Taiwan",
+   "val": 29,
+   "id": "astwn"
+ },
+ {
+   "name": "South Korea",
+   "val": 27,
+   "id": "askor"
+ },
+ {
+   "name": "Singapore",
+   "val": 22,
+   "id": "assgp"
+ },
+ {
+   "name": "Slovenia",
+   "val": 22,
+   "id": "eusvn"
+ },
+ {
+   "name": "Bahrain",
+   "val": 21,
+   "id": "asbhr"
+ },
+ {
+   "name": "Spain",
+   "val": 16,
+   "id": "euesp"
+ },
+ {
+   "name": "Albania",
+   "val": 16,
+   "id": "eualb"
+ },
+ {
+   "name": "Réunion",
+   "val": 14,
+   "id": "afreu"
+ },
+ {
+   "name": "Qatar",
+   "val": 13,
+   "id": "asqat"
+ },
+ {
+   "name": "Hong Kong",
+   "val": 13,
+   "id": "ashkg"
+ },
+ {
+   "name": "Luxembourg",
+   "val": 12,
+   "id": "eulux"
+ },
+ {
+   "name": "China",
+   "val": 11,
+   "id": "aschn"
+ },
+ {
+   "name": "Cyprus",
+   "val": 10,
+   "id": "eucyp"
+ },
+ {
+   "name": "Israel",
+   "val": 10,
+   "id": "asisr"
+ },
+ {
+   "name": "Lebanon",
+   "val": 10,
+   "id": "aslbn"
+ },
+ {
+   "name": "Finland",
+   "val": 9,
+   "id": "eufin"
+ },
+ {
+   "name": "Denmark",
+   "val": 9,
+   "id": "eudnk"
+ },
+ {
+   "name": "Bolivia",
+   "val": 9,
+   "id": "sabol"
+ },
+ {
+   "name": "Kuwait",
+   "val": 9,
+   "id": "askwt"
+ },
+ {
+   "name": "Oman",
+   "val": 9,
+   "id": "asomn"
+ },
+ {
+   "name": "Italy",
+   "val": 9,
+   "id": "euita"
+ },
+ {
+   "name": "Belgium",
+   "val": 8,
+   "id": "eubel"
+ },
+ {
+   "name": "France",
+   "val": 8,
+   "id": "eufra"
+ },
+ {
+   "name": "Belarus",
+   "val": 8,
+   "id": "eublr"
+ },
+ {
+   "name": "Czechia",
+   "val": 8,
+   "id": "eucze"
+ },
+ {
+   "name": "Uzbekistan",
+   "val": 7,
+   "id": "asuzb"
+ },
+ {
+   "name": "Zimbabwe",
+   "val": 7,
+   "id": "afzwe"
+ },
+ {
+   "name": "Japan",
+   "val": 7,
+   "id": "asjpn"
+ },
+ {
+   "name": "Myanmar (Burma)",
+   "val": 7,
+   "id": "asmmr"
+ },
+ {
+   "name": "El Salvador",
+   "val": 7,
+   "id": "naslv"
+ },
+ {
+   "name": "United Kingdom",
+   "val": 7,
+   "id": "eugbr"
+ },
+ {
+   "name": "Nepal",
+   "val": 6,
+   "id": "asnpl"
+ },
+ {
+   "name": "Slovakia",
+   "val": 6,
+   "id": "eusvk"
+ },
+ {
+   "name": "Honduras",
+   "val": 6,
+   "id": "nahnd"
+ },
+ {
+   "name": "Portugal",
+   "val": 6,
+   "id": "euprt"
+ },
+ {
+   "name": "Austria",
+   "val": 6,
+   "id": "euaut"
+ },
+ {
+   "name": "Australia",
+   "val": 6,
+   "id": "ocaus"
+ },
+ {
+   "name": "United States",
+   "val": 6,
+   "id": "nausa"
+ },
+ {
+   "name": "Côte d'Ivoire",
+   "val": 6,
+   "id": "afciv"
+ },
+ {
+   "name": "Morocco",
+   "val": 5,
+   "id": "afmar"
+ },
+ {
+   "name": "Libya",
+   "val": 5,
+   "id": "aflby"
+ },
+ {
+   "name": "Bulgaria",
+   "val": 5,
+   "id": "eubgr"
+ },
+ {
+   "name": "Malaysia",
+   "val": 5,
+   "id": "asmys"
+ },
+ {
+   "name": "Philippines",
+   "val": 5,
+   "id": "asphl"
+ },
+ {
+   "name": "Serbia",
+   "val": 5,
+   "id": "eusrb"
+ },
+ {
+   "name": "Costa Rica",
+   "val": 4,
+   "id": "nacri"
+ },
+ {
+   "name": "Sweden",
+   "val": 4,
+   "id": "euswe"
+ },
+ {
+   "name": "Netherlands",
+   "val": 4,
+   "id": "eunld"
+ },
+ {
+   "name": "Kazakhstan",
+   "val": 4,
+   "id": "askaz"
+ },
+ {
+   "name": "Canada",
+   "val": 4,
+   "id": "nacan"
+ },
+ {
+   "name": "Sri Lanka",
+   "val": 4,
+   "id": "aslka"
+ },
+ {
+   "name": "Uruguay",
+   "val": 4,
+   "id": "saury"
+ },
+ {
+   "name": "Colombia",
+   "val": 4,
+   "id": "sacol"
+ },
+ {
+   "name": "Iran",
+   "val": 4,
+   "id": "asirn"
+ },
+ {
+   "name": "Saudi Arabia",
+   "val": 4,
+   "id": "assau"
+ },
+ {
+   "name": "Tunisia",
+   "val": 3,
+   "id": "aftun"
+ },
+ {
+   "name": "Norway",
+   "val": 3,
+   "id": "eunor"
+ },
+ {
+   "name": "Switzerland",
+   "val": 3,
+   "id": "euche"
+ },
+ {
+   "name": "Ireland",
+   "val": 3,
+   "id": "euirl"
+ },
+ {
+   "name": "South Africa",
+   "val": 3,
+   "id": "afzaf"
+ },
+ {
+   "name": "Ecuador",
+   "val": 3,
+   "id": "saecu"
+ },
+ {
+   "name": "Chile",
+   "val": 3,
+   "id": "sachl"
+ },
+ {
+   "name": "Dominican Republic",
+   "val": 3,
+   "id": "nadom"
+ },
+ {
+   "name": "Russia",
+   "val": 3,
+   "id": "asrus"
+ },
+ {
+   "name": "Indonesia",
+   "val": 3,
+   "id": "asidn"
+ },
+ {
+   "name": "Jordan",
+   "val": 3,
+   "id": "asjor"
+ },
+ {
+   "name": "Argentina",
+   "val": 3,
+   "id": "saarg"
+ },
+ {
+   "name": "Thailand",
+   "val": 3,
+   "id": "astha"
+ },
+ {
+   "name": "Germany",
+   "val": 3,
+   "id": "eudeu"
+ },
+ {
+   "name": "Bangladesh",
+   "val": 3,
+   "id": "asbgd"
+ },
+ {
+   "name": "New Zealand",
+   "val": 2,
+   "id": "ocnzl"
+ },
+ {
+   "name": "Romania",
+   "val": 2,
+   "id": "eurou"
+ },
+ {
+   "name": "Mexico",
+   "val": 2,
+   "id": "namex"
+ },
+ {
+   "name": "Kenya",
+   "val": 2,
+   "id": "afken"
+ },
+ {
+   "name": "Brazil",
+   "val": 2,
+   "id": "sabra"
+ },
+ {
+   "name": "Pakistan",
+   "val": 2,
+   "id": "aspak"
+ },
+ {
+   "name": "Venezuela",
+   "val": 2,
+   "id": "saven"
+ },
+ {
+   "name": "Greece",
+   "val": 2,
+   "id": "eugrc"
+ },
+ {
+   "name": "Nigeria",
+   "val": 1,
+   "id": "afnga"
+ },
+ {
+   "name": "Poland",
+   "val": 1,
+   "id": "eupol"
+ },
+ {
+   "name": "Ukraine",
+   "val": 1,
+   "id": "euukr"
+ },
+ {
+   "name": "Peru",
+   "val": 1,
+   "id": "saper"
+ },
+ {
+   "name": "Egypt",
+   "val": 1,
+   "id": "afegy"
+ },
+ {
+   "name": "Algeria",
+   "val": 1,
+   "id": "afdza"
+ },
+ {
+   "name": "Vietnam",
+   "val": 1,
+   "id": "asvnm"
+ },
+ {
+   "name": "Turkey",
+   "val": 0,
+   "id": "astur"
+ }
+]
