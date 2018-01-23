@@ -62,7 +62,7 @@
 					However, internet connectivity is unevenly distributed, as are the benefits and risks of smart city initiatives.</p>
 				</div>
 				<div class="col-md-8">
-					<svg id="broadband" height="100%"></svg>
+					<svg id="broadband" height="500px"></svg>
 				</div>
 			</div>
 			<div class="row">
@@ -119,12 +119,12 @@
 	
 	  var broadband_data = 
 		{race: [
-			{"id": "white", "text":"White", x:1, y: 78},
-			{"id": "black", "text":"Black", x:2, y: 65},
-			{"id": "hispanic", "text":"Hispanic", x:3, y: 58}
+			{"id": "White", "text":"White", x:1, y: 78},
+			{"id": "Black", "text":"Black", x:2, y: 65},
+			{"id": "Hispanic", "text":"Hispanic", x:3, y: 58}
 		],
 		income: [
-			{"id": "lt30", "text": "Less than $30k", x:1, y: 53},
+			{"id": "Less than $30k", "text": "Less than $30k", x:1, y: 53},
 			{"id":"30to49", "text": "$30-40k", x:2, y: 71},
 			{"id":"50to74", "text": "$50-74k", x:3, y: 83},
 			{"id": "mt75", "text": "More than $75k", x:4, y: 93}
@@ -136,11 +136,34 @@
 			{"id": "clg", "text": "College", x:4, y: 91}
 		]};
 	
-	
 	new d3plus.BarChart()
 		.select('#broadband')
-		.data(broadband_data.race)
+		.data(broadband_data.income)
 		.barPadding(0)
+		.legend(false)
+		.xConfig(
+			{title: false},
+			{labels: [0,1,2]}
+			)
+		.yConfig(
+			{title: "% of households with broadband access"}
+			)
+		.yDomain([0,100])
+		 .tooltipConfig({
+			body: function(d) {
+			  var table = "<table class='tooltip-table'>";
+			  table += "<tr><td class='title'>Value:</td><td class='data'>" + d.y + "</td></tr>";
+			  table += "</table>";
+			  return table;
+			},
+			footer: function(d) {
+			  return "<sub class='tooltip-footer'>Data Collected in 2012</sub>";
+			},
+			title: function(d) {
+			  var txt = d.id;
+			  return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();;
+			}
+		  })
 		.render();
 
 	/** percentage **/
@@ -381,7 +404,7 @@
 			.select("#my-axis")
 			.data(data)
 			.groupBy("id")
-			.tooltip(false)
+//			.tooltip(false)
 			.xConfig({title: false})
 			.yConfig({title: "# trans* homicides"})
 			.yDomain([0])
@@ -390,7 +413,21 @@
 					{stroke: "#FF9C24",
 					strokeWidth: 3}
 				})
-
+		 .tooltipConfig({
+			body: function(d) {
+			  var table = "<table class='tooltip-table'>";
+			  table += "<tr><td class='title'>Value:</td><td class='data'>" + d.y + "</td></tr>";
+			  table += "</table>";
+			  return table;
+			},
+			footer: function(d) {
+			  return "<sub class='tooltip-footer'>Data Collected in 2012</sub>";
+			},
+			title: function(d) {
+			  var txt = d.id;
+			  return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();;
+			}
+		  })
 			.render();
 		d3.select('.d3plus-line-shape').on('click', function() {console.log('hi');});
 
