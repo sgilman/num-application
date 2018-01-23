@@ -61,7 +61,9 @@
 					<p>With the proliferation of smart phones, sensors, storage capacity, and computing power, the amount of information that circulates is growing exponentially. We are exponentially more connected than we were just 10 years ago, which provides opportunities to make personal and societal decisions more quickly and efficiently than ever before.
 					However, internet connectivity is unevenly distributed, as are the benefits and risks of smart city initiatives.</p>
 				</div>
-				<div class="col-md-8"><div id="svg_map" height="100%"></div></div>
+				<div class="col-md-8">
+					<svg id="broadband" height="100%"></svg>
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-12">
@@ -83,11 +85,13 @@
 					<p>If we’re asking the question how should we do x?, “Smart city” is a great answer. But if it becomes an answer to “What should we do?”, smart cities may hide the values we hold.</p>
 				</div>
 				<div class="col-xs-12 col-md-8 order-md-2">
-					<p>For example, I was recently misgendered by a facial recognition sensor at the MIT Museum. As a cisgender male, I was able to laugh it off and got a funny Instagram story out of this encounter. For transgender, nonbinary, or other gender non-conforming individuals, however, this is dangerous. By reinforcing gender as an extrinsic characteristic, based on an individual’s anatomy and appearance, it excludes those whose intrinsic identity does not match our appearance expectations.</p>	
+					<p>For example, I was recently misgendered by a facial recognition sensor at the MIT Museum. As a cisgender man, I was able to laugh it off and got a funny Instagram story out of this encounter. For transgender, nonbinary, or other gender non-conforming individuals, however, this is dangerous. By reinforcing gender as an extrinsic characteristic, based on an individual’s anatomy and appearance, it excludes those whose intrinsic identity does not match our appearance expectations.</p>	
 				</div>
 				<div class="col-xs-12 col-md-4 order-md-1">
 					<img src="img/me.jpg" width="100%"></img>
 				</div>
+			</div>
+			<div class="row">
 				<div class="col-xs-12 col-md-4">
 					 This notion of gender contributes to discrimination and violence that these individuals face. Sensors, algorithms, and datasets are not good for their own sake, but rather for the ends that they serve. So instead of trying to create a smart city, our goal should be to use smart tools to create a prosperous, sustainable, and just city.
 				</div>
@@ -111,6 +115,35 @@
 			<script src="js/googletrends.json"></script>
 -->
 	<script>
+	/** broadband bar chart **/
+	
+	  var broadband_data = 
+		{race: [
+			{"id": "white", "text":"White", x:1, y: 78},
+			{"id": "black", "text":"Black", x:2, y: 65},
+			{"id": "hispanic", "text":"Hispanic", x:3, y: 58}
+		],
+		income: [
+			{"id": "lt30", "text": "Less than $30k", x:1, y: 53},
+			{"id":"30to49", "text": "$30-40k", x:2, y: 71},
+			{"id":"50to74", "text": "$50-74k", x:3, y: 83},
+			{"id": "mt75", "text": "More than $75k", x:4, y: 93}
+		],
+		education: [
+			{"id": "lths", "text": "Less than high school", x:1, y: 34 },
+			{"id": "hs", "text": "High school", x:2,  y: 62},
+			{"id": "smclg", "text": "Some college", x:3,  y: 80},
+			{"id": "clg", "text": "College", x:4, y: 91}
+		]};
+	
+	
+	new d3plus.BarChart()
+		.select('#broadband')
+		.data(broadband_data.race)
+		.barPadding(0)
+		.render();
+
+	/** percentage **/
 		var width = 300;
 		var height = 50
 		var data = [{shortText: 'internal', longText: 'internal staff', value: 27, color: 'red'},
@@ -249,8 +282,6 @@
 **/ 
 
 
-      <script src="js/d3plus.v2.js"></script>
-	  <script>
 		var data = [
 		 {
 		   "id": "US",
@@ -343,16 +374,23 @@
 		  .height(300)
 		  .render();
 **/		
+
+
+		/** Line chart of trans homicides **/
 		new d3plus.LinePlot()
 			.select("#my-axis")
 			.data(data)
 			.groupBy("id")
 			.tooltip(false)
+			.xConfig({title: false})
+			.yConfig({title: "# trans* homicides"})
 			.yDomain([0])
 			.shapeConfig(
 				{Line :
-					{stroke: "#FF9C24"}
+					{stroke: "#FF9C24",
+					strokeWidth: 3}
 				})
+
 			.render();
 		d3.select('.d3plus-line-shape').on('click', function() {console.log('hi');});
 
