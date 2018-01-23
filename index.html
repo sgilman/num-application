@@ -83,15 +83,24 @@
 					<p>If we’re asking the question how should we do x?, “Smart city” is a great answer. But if it becomes an answer to “What should we do?”, smart cities may hide the values we hold.</p>
 				</div>
 				<div class="col-xs-12 col-md-8 order-md-2">
-					<p>For example, I was recently misgendered by a facial recognition sensor at the MIT Museum. As a cisgender male, I was able to laugh it off and got a funny Instagram story out of this encounter. For transgender, nonbinary, or other gender non-conforming individuals, however, this is dangerous. By reinforcing gender as an extrinsic characteristic, based on an individual’s anatomy and appearance, it excludes those whose intrinsic identity does not match our appearance expectations. This notion of gender contributes to discrimination and violence that these individuals face. Sensors, algorithms, and datasets are not good for their own sake, but rather for the ends that they serve. So instead of trying to create a smart city, our goal should be to use smart tools to create a prosperous, sustainable, and just city. </p>	
+					<p>For example, I was recently misgendered by a facial recognition sensor at the MIT Museum. As a cisgender male, I was able to laugh it off and got a funny Instagram story out of this encounter. For transgender, nonbinary, or other gender non-conforming individuals, however, this is dangerous. By reinforcing gender as an extrinsic characteristic, based on an individual’s anatomy and appearance, it excludes those whose intrinsic identity does not match our appearance expectations.</p>	
 				</div>
 				<div class="col-xs-12 col-md-4 order-md-1">
 					<img src="img/me.jpg" width="100%"></img>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					 This notion of gender contributes to discrimination and violence that these individuals face. Sensors, algorithms, and datasets are not good for their own sake, but rather for the ends that they serve. So instead of trying to create a smart city, our goal should be to use smart tools to create a prosperous, sustainable, and just city.
+				</div>
+				<div class="col-xs-12 col-md-8">
+					<svg width=600 height=300>
+					  <g id="my-axis"></g>
+					</svg>
 				</div>
 			</div>
 			<script src="js/jquery.min.js"></script>
 			<script src="js/bootstrap.min.js"></script>
 			<script src="https://d3js.org/d3.v3.min.js"></script>
+			<script src="js/d3plus.v2.js"></script>
 
 
 			
@@ -238,6 +247,114 @@
 					}
 				}
 **/ 
+
+
+      <script src="js/d3plus.v2.js"></script>
+	  <script>
+		var data = [
+		 {
+		   "id": "US",
+		   "x": 2009,
+		   "y": 14
+		 },
+		 {
+		   "id": "US",
+		   "x": 2010,
+		   "y": 9
+		 },
+		 {
+		   "id": "US",
+		   "x": 2011,
+		   "y": 17
+		 },
+		 {
+		   "id": "US",
+		   "x": 2012,
+		   "y": 16
+		 },
+		 {
+		   "id": "US",
+		   "x": 2013,
+		   "y": 22
+		 },
+		 {
+		   "id": "US",
+		   "x": 2014,
+		   "y": 14
+		 },
+		 {
+		   "id": "US",
+		   "x": 2015,
+		   "y": 22
+		 },
+		 {
+		   "id": "US",
+		   "x": 2016,
+		   "y": 23
+		 },
+		 {
+		   "id": "US",
+		   "x": 2017,
+		   "y": 28
+		 },
+/**
+		 {
+		   "id": "World",
+		   "x": 2009,
+		   "y": 207
+		 },
+		 {
+		   "id": "World",
+		   "x": 2010,
+		   "y": 223
+		 },
+		 {
+		   "id": "World",
+		   "x": 2011,
+		   "y": 251
+		 },
+		 {
+		   "id": "World",
+		   "x": 2012,
+		   "y": 292
+		 },
+		 {
+		   "id": "World",
+		   "x": 2013,
+		   "y": 246
+		 },
+		 {
+		   "id": "World",
+		   "x": 2014,
+		   "y": 278
+		 },
+		 {
+		   "id": "World",
+		   "x": 2015,
+		   "y": 245
+		 }
+**/
+		];
+		
+		var bottom = new d3plus.AxisBottom()
+		  .select("#my-axis")
+		  .domain([0, 10])
+		  .width(600)
+		  .height(300)
+		  .render();
+		
+		new d3plus.LinePlot()
+			.select("#my-axis")
+			.data(data)
+			.groupBy("id")
+			.tooltip(false)
+			.yDomain([0])
+			.shapeConfig(
+				{Line :
+					{stroke: "#FF9C24"}
+				})
+			.render();
+		d3.select('.d3plus-line-shape').on('click', function() {console.log('hi');});
 
 	</script>
 	</body>
