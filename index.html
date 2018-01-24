@@ -34,6 +34,10 @@
 			.dropdown {
 				display: inline-block;	
 			}
+			
+			.d3plus-Pie {
+				margin: 100px;
+			}
 
 		</style>
 		
@@ -50,11 +54,11 @@
 					<h2>... a network</h2>
 				</div>
 
-				<div class="col-md-4">
+				<div class="col-md-8">
 					<p>With the proliferation of smart phones, sensors, storage capacity, and computing power, the amount of information that circulates is growing exponentially. We are exponentially more connected than we were just 10 years ago, which provides opportunities to make personal and societal decisions more quickly and efficiently than ever before.
 					However, internet connectivity is unevenly distributed among racial, education, and income groups, as are the benefits and risks of smart city initiatives.</p>
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-4" style="text-align:center">
 					Broadband access by
 						<div class="dropdown" style="display:inline-block;">
 						  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -66,19 +70,20 @@
 								<li data = "education" text="education level"><a class="dropdown-item" href="#">education level</a></li>
 							</ul>
 						 </div>
-				in 2016
-					<div><svg id="broadband" height="300px"></svg></div>
+					in 2016
+				<div><svg id="broadband"></svg></div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-12">
 					<h2>...a partnership</h2>
 				</div>
-				<div class="col-xs-12 col-md-4 order-md-2">
+				<div class="col-xs-12 col-md-8 order-md-2">
 					<p>Most smart cities initiatives involve public-private partnerships in various forms. In several respects, these partnerships are complementary: they bring a wider set of skills and funding sources to smart city initiatives. However, they also introduce some tensions, since private enterprises and municipal governments serve different populations (customers vs. citizens) and have different end goals (profit vs. social good).
 					</p>
 				</div>
-				<div class="col-xs-12 col-md-8 order-md-1" height="100%">
+				<div class="col-xs-12 col-md-4 order-md-1" style="text-align:center;" height="100%">
+					<span style="text-align:center;">Who implements smart city projects?</span>
 					<svg id="partnership" widtth="100%" height="300px"></svg>
 					<div id="caption" style="display:inline-block">
 					</div>
@@ -89,6 +94,8 @@
 					<h2>...a new means, but not a new end</h2>
 					<p>If we’re asking the question <em>how should we do x?</em>, “Smart city” is a great answer. But if it becomes an answer to <em>What should we do?</em>, smart cities may hide the values we hold.</p>
 				</div>
+			</div>
+			<div class="row">
 				<div class="col-xs-12 col-md-8 order-md-2">
 					<p>For example, I was recently misgendered by a facial recognition sensor at the MIT Museum. As a cisgender man, I was able to laugh it off and got a funny Instagram story out of this encounter. For transgender, nonbinary, or other gender non-conforming individuals, however, this is dangerous. By reinforcing gender as an extrinsic characteristic, based on an individual’s anatomy and appearance, it excludes those whose intrinsic identity does not match our appearance expectations.</p>	
 				</div>
@@ -98,7 +105,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-md-4">
-					 This notion of gender contributes to discrimination and violence that these individuals face. Sensors, algorithms, and datasets are not good for their own sake, but rather for the ends that they serve. So instead of trying to create a smart city, our goal should be to use smart tools to create a prosperous, sustainable, and just city.
+					 <p>This notion of gender contributes to discrimination and violence that these individuals face. Sensors, algorithms, and datasets are not good for their own sake, but rather for the ends that they serve. So instead of trying to create a smart city, our goal should be to use smart tools to create a prosperous, sustainable, and just city.</p>
 				</div>
 				<div class="col-xs-12 col-md-8">
 					<svg width=600 height=300>
@@ -109,7 +116,6 @@
 			<script src="js/jquery.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 			<script src="js/bootstrap.min.js"></script>
-			<script src="https://d3js.org/d3.v3.min.js"></script>
 			<script src="js/d3plus.v2.js"></script>
 
 
@@ -174,7 +180,7 @@
 			barChart.data(broadband_data[$(this).attr('data')]).render();
 		});
 
-	/** percentage **/
+	/** partnerships pie chart **/
 
 	var partnershipData = [{id: 'internal staff', value: 27, color: 'red'},
 					{id: 'technology partners/contractors/managed service providers', value: 47, color: 'blue'},
@@ -184,12 +190,14 @@
 		.groupBy(["id"])
 		.select("#partnership")
 		.data(partnershipData)
+//		.title("Who implements smart city projects?")
 		.innerRadius(50)
 		.sort(function comparator(a,b) {
 			return 1/b.value - 1/a.value;
 				})
 		.tooltipConfig({
 			body: function(d) {
+			  return d.value + "%";
 			  return d.value + "%";
 			},
 			title: function(d) {
@@ -198,145 +206,9 @@
 		  })
 		.render();
 
-/**
-		var width = 300;
-		var height = 50
-		var data = [{shortText: 'internal', longText: 'internal staff', value: 27, color: 'red'},
-					{shortText: 'contractors', longText: 'technology partners/contractors/managed service providers', value: 47, color: 'blue'},
-					{shortText: 'both', longText: 'equal involvement of both internal staff and contractors', value: 24, color: 'green'}];
-		var svg = d3.select("#svg2");
-		svg.attr('width', width)
-		   .attr('height', height)
-		   .attr('margins', 10);
-		d3.select('#caption').attr('max-width', width+'px');
-        var chart = svg.append("g")
-            .attr("id","chart");
-		var x=0;	
-		var gees = {};
-		data.forEach(function (d) {
-			gees[d.shortText] = chart.append("g");
 
-					gees[d.shortText].append("rect").attr("width", d.value/100.0*width)
-                .attr("height",height)
-				.attr("x", x)
-                .attr("fill",d.color)
-			gees[d.shortText].append('text')
-				.attr('dy', height/2)
-				.attr('dx', x + d.value/200.0*width)
-				.attr('fill', 'white')
-				.style('text-anchor', 'middle')
-				.attr('dominant-baseline', 'central')
-				.text(d.shortText);
-
-			gees[d.shortText]				
-				.on('mouseover', function() {
-					d3.select(this).selectAll('rect').attr('z-index', 999)
-								   .style('stroke', 'yellow')
-								   .style('stroke-width', 5)
-								   .style('stroke-alignment', 'inside')
-								   ;
-
-					var captionText = '<p style="color:' + d.color + ';font-weight:bold;font-size:24px;text-align:center;width:'+width+'px;">' + d.value + '%</p><p style="text-align:center;width:'+width+'px;">of smart city projects were implemented through</p><p style="font-weight:bold;text-align:center;width:'+width+'px;">' + d.longText + '</p>';
-
-
-//						<p id="staffing"></p>'<span style="color:' + d.color + ';">' + d.value+'% </span>'+'of projects were implemented through ' + d.longText
-
-
-					d3.selectAll('#caption').html(captionText);
-//					d3.selectAll('#caption').text(d.value+'% '+'of projects were implemented through ' + d.longText);
-					})
-				.on('mouseout', function() {
-					d3.select(this).selectAll('rect').style('stroke', '')
-								   .style('stroke-width', 0);
-					d3.select(this).select('#caption').text('');
-					});
-			x += d.value/100.0*width;
-
-			});
-/**
-		var myShape=  chart.append("rect").attr("width", d.value/100.0 * width)
-                .attr("height","50px")
-                .attr("fill",d.color);
-
-
-/**		
-	        // Common Variables
-      var data = [{gender: 'male', pronoun: 'he', count: 1269529, bossies:1086},
-				  {gender: 'female', pronoun: 'she', count: 507761, bossies: 1003}
-				  ];
-	  var data2 = [[id: '0', 'public': 33, 'private];
-
-
-      var width = 420;
-      var barHeight = 30;
-	  
-	  
-	var tooltip = d3.select("body") //set the tooltip
-		.append("div")
-		.style("position", "absolute")
-		.style("z-index", "10")
-		.style("visibility", "hidden")
-		.style("color", "white")
-		.style("background-color", "rgba(0, 0, 0, 0.75)")
-		.style("border-radius", "6px")
-		.style("font", "12px PT Sans")
-		.text("tooltip");
-
-
-	  var chart2 = d3.select("#svg2")
-					.attr("height", barHeight * data.length )
-					.attr("width", "420")
-					.attr("margin", "30, 30, 30, 30");
-	   var bar2 = chart2.selectAll("g")
-					.data(data2)
-					.enter().append("g")
-					.attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")";});
-		bar2.append("rect")
-			.attr("width", function(d,i) { return (d.value/100) * width})
-			.attr("height", barHeight-10)
-			.style("fill", "#000")
-/**
-			.on("mouseover", function(d) {
-				d3.select(this).style("fill", "yellow");
-				tooltip.text(d.count.toLocaleString('en-US', {minimumFractionDigist: 0})+" ("+Math.round(d.count/1973979.0 * 100, 2)+"%) of 1,973,979 articles contain the word '"+d.pronoun+"'");
-				tooltip.style("visibility", "visible");
-			})
-			.on("mousemove", function(d) {
-				return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px")
-			})
-			.on("mouseout", function(d){
-				d3.select(this).style("fill", genderedColors(d));
-				return tooltip.style("visibility", "hidden");
-			});
-		bar2.append("rect")
-			.attr("x", function(d,i) { return (d.count/1973979.0) * width})
-			.attr("width", function(d,i) { return (1-(d.count/1973979.0)) * width})
-			.attr("height", barHeight-10)
-			.style("fill", "grey");
-
-	  
-		bar2.append("text")
-			.attr("x", function(d) { return d.count*10 + 3;})
-			.attr("y", barHeight/2)
-			.attr("dy", ".35em")
-			.text(function(d) { return d; });
-
-				function genderedColors(d,i) {
-				switch(d.gender) {
-					case 'male':
-						return "blue";
-						break;
-					case 'female':
-						return "pink";
-						break;
-					default:
-						return "green";
-						break;
-					}
-				}
-**/ 
-
-
+	/** trans homicide line chart **/
+	
 		var homicideData = [
 		 {
 		   "id": "US",
@@ -430,15 +302,12 @@
 		  .render();
 **/		
 
-
-		/** Line chart of trans homicides **/
 		new d3plus.LinePlot()
 			.select("#my-axis")
 			.title("Known trans* homicides in the US, 2009-2017")
 			.titleConfig({"style": "bold", "font-size": 24})
 			.data(homicideData)
 			.groupBy("id")
-//			.tooltip(false)
 			.xConfig({title: false})
 			.yConfig({title: "# trans* homicides"})
 			.yDomain([0])
@@ -459,7 +328,6 @@
 			}
 		  })
 			.render();
-		d3.select('.d3plus-line-shape').on('click', function() {console.log('hi');});
 
 	</script>
 	</body>
