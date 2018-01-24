@@ -56,16 +56,16 @@
 				</div>
 				<div class="col-md-8">
 					Broadband access by
-				<div class="dropdown" style="display:inline-block;">
-				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					income
-				  </button>
-				  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<li data="race" text="race"><a class="dropdown-item"  href="#">race</a></li>
-						<li data ="income" text="income"><a class="dropdown-item"  href="#">income</a></li>
-						<li data = "education" text="education level"><a class="dropdown-item" href="#">education level</a></li>
-					</ul>
-				 </div>
+						<div class="dropdown" style="display:inline-block;">
+						  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							income
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<li data="race" text="race"><a class="dropdown-item"  href="#">race</a></li>
+								<li data ="income" text="income"><a class="dropdown-item"  href="#">income</a></li>
+								<li data = "education" text="education level"><a class="dropdown-item" href="#">education level</a></li>
+							</ul>
+						 </div>
 				in 2016
 					<div><svg id="broadband" height="300px"></svg></div>
 				</div>
@@ -78,8 +78,8 @@
 					<p>Most smart cities initiatives involve public-private partnerships in various forms. In several respects, these partnerships are complementary: they bring a wider set of skills and funding sources to smart city initiatives. However, they also introduce some tensions, since private enterprises and municipal governments serve different populations (customers vs. citizens) and have different end goals (profit vs. social good).
 					</p>
 				</div>
-				<div class="col-xs-12 col-md-8 order-md-1">
-					<svg id="svg2"></svg>
+				<div class="col-xs-12 col-md-8 order-md-1" height="100%">
+					<svg id="partnership" widtth="100%" height="300px"></svg>
 					<div id="caption" style="display:inline-block">
 					</div>
 				</div>
@@ -175,6 +175,30 @@
 		});
 
 	/** percentage **/
+
+	var partnershipData = [{id: 'internal staff', value: 27, color: 'red'},
+					{id: 'technology partners/contractors/managed service providers', value: 47, color: 'blue'},
+					{id: 'equal involvement of both internal staff and contractors', value: 24, color: 'green'}];
+
+	  let pie = new d3plus.Pie()
+		.groupBy(["id"])
+		.select("#partnership")
+		.data(partnershipData)
+		.innerRadius(50)
+		.sort(function comparator(a,b) {
+			return 1/b.value - 1/a.value;
+				})
+		.tooltipConfig({
+			body: function(d) {
+			  return d.value + "%";
+			},
+			title: function(d) {
+			  return d.id;
+			}
+		  })
+		.render();
+
+/**
 		var width = 300;
 		var height = 50
 		var data = [{shortText: 'internal', longText: 'internal staff', value: 27, color: 'red'},
@@ -313,7 +337,7 @@
 **/ 
 
 
-		var data = [
+		var homicideData = [
 		 {
 		   "id": "US",
 		   "x": 2009,
@@ -410,7 +434,9 @@
 		/** Line chart of trans homicides **/
 		new d3plus.LinePlot()
 			.select("#my-axis")
-			.data(data)
+			.title("Known trans* homicides in the US, 2009-2017")
+			.titleConfig({"style": "bold", "font-size": 24})
+			.data(homicideData)
 			.groupBy("id")
 //			.tooltip(false)
 			.xConfig({title: false})
