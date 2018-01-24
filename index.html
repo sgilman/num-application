@@ -13,16 +13,13 @@
 				background-color: #A2AFBF;
 			}
 			
-			h1 {
-				color: #47334E;
-			}
-			
 			h2 {
 				color: #fff;
 				background-color: #357591;
 				padding: 2px 0 2px 50px;
 			}
 			p {
+				font-size: 18px;
 			}
 			
 			
@@ -33,13 +30,9 @@
 			.row {
 				padding: 0 10% 0 10%;
 			}
-			.light {
-				background-color: #A2AFBF;
-				outline-color: #fff;
-			}
 			
-			.dark {
-				background-color: #357591;
+			.dropdown {
+				display: inline-block;	
 			}
 
 		</style>
@@ -59,10 +52,22 @@
 
 				<div class="col-md-4">
 					<p>With the proliferation of smart phones, sensors, storage capacity, and computing power, the amount of information that circulates is growing exponentially. We are exponentially more connected than we were just 10 years ago, which provides opportunities to make personal and societal decisions more quickly and efficiently than ever before.
-					However, internet connectivity is unevenly distributed, as are the benefits and risks of smart city initiatives.</p>
+					However, internet connectivity is unevenly distributed among racial, education, and income groups, as are the benefits and risks of smart city initiatives.</p>
 				</div>
 				<div class="col-md-8">
-					<svg id="broadband" height="500px"></svg>
+					Broadband access by
+				<div class="dropdown" style="display:inline-block;">
+				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					income
+				  </button>
+				  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<li data="race" text="race"><a class="dropdown-item"  href="#">race</a></li>
+						<li data ="income" text="income"><a class="dropdown-item"  href="#">income</a></li>
+						<li data = "education" text="education level"><a class="dropdown-item" href="#">education level</a></li>
+					</ul>
+				 </div>
+				in 2016
+					<div><svg id="broadband" height="300px"></svg></div>
 				</div>
 			</div>
 			<div class="row">
@@ -80,9 +85,9 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-12">
+				<div class="col-md-12">
 					<h2>...a new means, but not a new end</h2>
-					<p>If we’re asking the question how should we do x?, “Smart city” is a great answer. But if it becomes an answer to “What should we do?”, smart cities may hide the values we hold.</p>
+					<p>If we’re asking the question <em>how should we do x?</em>, “Smart city” is a great answer. But if it becomes an answer to <em>What should we do?</em>, smart cities may hide the values we hold.</p>
 				</div>
 				<div class="col-xs-12 col-md-8 order-md-2">
 					<p>For example, I was recently misgendered by a facial recognition sensor at the MIT Museum. As a cisgender man, I was able to laugh it off and got a funny Instagram story out of this encounter. For transgender, nonbinary, or other gender non-conforming individuals, however, this is dangerous. By reinforcing gender as an extrinsic characteristic, based on an individual’s anatomy and appearance, it excludes those whose intrinsic identity does not match our appearance expectations.</p>	
@@ -102,6 +107,7 @@
 				</div>
 			</div>
 			<script src="js/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 			<script src="js/bootstrap.min.js"></script>
 			<script src="https://d3js.org/d3.v3.min.js"></script>
 			<script src="js/d3plus.v2.js"></script>
@@ -124,27 +130,28 @@
 			{"id": "Hispanic", "text":"Hispanic", x:3, y: 58}
 		],
 		income: [
-			{"id": "Less than $30k", "text": "Less than $30k", x:1, y: 53},
-			{"id":"30to49", "text": "$30-40k", x:2, y: 71},
-			{"id":"50to74", "text": "$50-74k", x:3, y: 83},
-			{"id": "mt75", "text": "More than $75k", x:4, y: 93}
+			{"id": "<$30k", "text": "Less than $30k", x:1, y: 53},
+			{"id":"$30-40k", "text": "$30-40k", x:2, y: 71},
+			{"id":"$50-74k", "text": "$50-74k", x:3, y: 83},
+			{"id": ">$75k", "text": "More than $75k", x:4, y: 93}
 		],
 		education: [
-			{"id": "lths", "text": "Less than high school", x:1, y: 34 },
-			{"id": "hs", "text": "High school", x:2,  y: 62},
-			{"id": "smclg", "text": "Some college", x:3,  y: 80},
-			{"id": "clg", "text": "College", x:4, y: 91}
+			{"id": "Less than high school", "text": "Less than high school", x:1, y: 34 },
+			{"id": "High school", "text": "High school", x:2,  y: 62},
+			{"id": "Some college", "text": "Some college", x:3,  y: 80},
+			{"id": "College", "text": "College", x:4, y: 91}
 		]};
 	
-	new d3plus.BarChart()
+	var barChart = new d3plus.BarChart()
 		.select('#broadband')
 		.data(broadband_data.income)
 		.barPadding(0)
 		.legend(false)
 		.xConfig(
-			{title: false},
-			{labels: [0,1,2]}
-			)
+			{title: false,
+			labels: [],
+			ticks: []
+			})
 		.yConfig(
 			{title: "% of households with broadband access"}
 			)
@@ -152,19 +159,20 @@
 		 .tooltipConfig({
 			body: function(d) {
 			  var table = "<table class='tooltip-table'>";
-			  table += "<tr><td class='title'>Value:</td><td class='data'>" + d.y + "</td></tr>";
+			  table += "<tr><td class='title'>Broadband access:</td><td class='data'>" + d.y + "%</td></tr>";
 			  table += "</table>";
 			  return table;
 			},
-			footer: function(d) {
-			  return "<sub class='tooltip-footer'>Data Collected in 2012</sub>";
-			},
 			title: function(d) {
-			  var txt = d.id;
-			  return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();;
+			  return d.id;
 			}
 		  })
 		.render();
+
+		$('.dropdown-menu > li').on('click', function () {
+			$('#dropdownMenuButton').text($(this).attr('text'));
+			barChart.data(broadband_data[$(this).attr('data')]).render();
+		});
 
 	/** percentage **/
 		var width = 300;
@@ -416,16 +424,12 @@
 		 .tooltipConfig({
 			body: function(d) {
 			  var table = "<table class='tooltip-table'>";
-			  table += "<tr><td class='title'>Value:</td><td class='data'>" + d.y + "</td></tr>";
+			  table += "<tr><td class='title'>Known trans* homicides:</td><td class='data'>" + d.y + "</td></tr>";
 			  table += "</table>";
 			  return table;
 			},
-			footer: function(d) {
-			  return "<sub class='tooltip-footer'>Data Collected in 2012</sub>";
-			},
 			title: function(d) {
-			  var txt = d.id;
-			  return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();;
+			  return d.x;
 			}
 		  })
 			.render();
